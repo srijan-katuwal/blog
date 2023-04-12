@@ -1,0 +1,15 @@
+.blog {
+    width: 1000px;
+    margin: auto;
+}
+
+.blog input {
+    font-size: 5rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 8px 10px;
+}
+
+.blog input:focus {
+    outline: none;
+}
