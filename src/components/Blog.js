@@ -1,33 +1,30 @@
 import './blog.css';
 import { useState } from 'react';
 
+import CustomInput from './CustomInput/CustomInput';
+
 function Blog() {
-    const [currentBlog, setCurrentBlog] = useState('');
-    const [blogs, setBlogs] = useState([]);
-
-    const handleChange = (event) => {
-        setCurrentBlog(event.target.value);
+    const [currentCount, setCurrentCount] = useState(0);
+    const [lines, setLines] = useState({ 0: '' });
+    const lineInputs = () => {
+        const inputs = [];
+        for (let i in lines) {
+            inputs.push(
+                <CustomInput addNewInput={addNewInput} line={lines[i]} key={i} />
+            )
+        }
+        return inputs;
     }
-    const handleSubmit = (event) => {
-        setBlogs([...blogs, currentBlog]);
-        setCurrentBlog('');
-        event.preventDefault();
+    const addNewInput = () => {
+        setCurrentCount(currentCount + 1);
+        setLines({ ...lines, [currentCount]: '' });
+        console.log(lines)
     }
-
     return (
         <div className='blog'>
-            <form onSubmit={handleSubmit}>
-                <input className='title' placeholder='Title' onChange={handleChange} value={currentBlog} />
-                <button type='submit'>Submit</button>
-            </form>
-            <div>
-                <h2>BLOG</h2>
-                {blogs.length > 0 &&
-                    <ul className='blog-list'>
-                        {blogs.map((blog) => <li>{blog}</li>)}
-                    </ul>
-                }
-            </div>
+            {
+                lineInputs()
+            }
         </div>
     )
 }
